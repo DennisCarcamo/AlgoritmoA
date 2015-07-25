@@ -15,8 +15,8 @@ public final class NoSolucao {
 
     private Tabuleiro tabuleiro;
     private int quantidadeDeMovimentos; //g(n)
-    private int pecasForaDoLugar; //h(n)
-    private NoSolucao noPai; //h(n)
+    private int pecasForaDoLugar; //h(n)    
+    private NoSolucao noPai; 
 
     private ArrayList<NoSolucao> filhos;
 
@@ -39,7 +39,7 @@ public final class NoSolucao {
         this.setNoPai(null);
 
     }
-
+    
     public ArrayList<NoSolucao> addFilho(NoSolucao noSolucao) {
         filhos.add(noSolucao);
         return filhos;

@@ -5,14 +5,31 @@
  */
 package projeto2;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author Lucas
  */
 public class AlgoritmoAEstrela {
     
+    private Map<Integer,NoSolucao> estadosAbertos;
+    private Map<Integer,NoSolucao> estadosFechados;
     
-    static NoSolucao umDosSucessoresESolucao( NoSolucao no ) {
+    
+
+    public AlgoritmoAEstrela( NoSolucao noRaiz ) {
+        estadosAbertos = new HashMap<Integer,NoSolucao>();
+        estadosFechados = new HashMap<Integer,NoSolucao>();
+        estadosAbertos.put(noRaiz.getTabuleiro().getHashCode(),noRaiz);
+//        estadosAbertos.remove(noRaiz.getTabuleiro().getHashCode()); Como retirar
+        
+        
+        
+    }            
+    
+    private NoSolucao umDosSucessoresESolucao( NoSolucao no ) {
         
         for (NoSolucao filho : no.getFilhos()) {
             
@@ -23,7 +40,7 @@ public class AlgoritmoAEstrela {
         
     }
 
-    static void geradorDeSucessores(NoSolucao no) {        
+    private void geradorDeSucessores(NoSolucao no) {        
         
 
         Celula celulaDeControle = no.getTabuleiro().getCelulaDeControle();
