@@ -28,40 +28,33 @@ public class AlgoritmoAEstrela {
 
         Celula celulaDeControle = no.getTabuleiro().getCelulaDeControle();
         if (celulaDeControle.podeSubir()) {
-            NoSolucao novoNo = new NoSolucao(no.getTabuleiro(), no.getQuantidadeDeMovimentos() + 1);
+            NoSolucao novoNo = new NoSolucao(no.getTabuleiro(), no.getQuantidadeDeMovimentos() + 1, no);
             novoNo.getTabuleiro().movaPeca(novoNo.getTabuleiro().getCelula((byte) (novoNo.getTabuleiro().getCelulaDeControle().getPosicaoX() - 1), novoNo.getTabuleiro().getCelulaDeControle().getPosicaoY()));
             no.addFilho(novoNo);
 
         }
 
         if (celulaDeControle.podeDescer()) {
-            NoSolucao novoNo = new NoSolucao(no.getTabuleiro(), no.getQuantidadeDeMovimentos() + 1);
+            NoSolucao novoNo = new NoSolucao(no.getTabuleiro(), no.getQuantidadeDeMovimentos() + 1, no);
             novoNo.getTabuleiro().movaPeca(novoNo.getTabuleiro().getCelula((byte) (novoNo.getTabuleiro().getCelulaDeControle().getPosicaoX() + 1), novoNo.getTabuleiro().getCelulaDeControle().getPosicaoY()));
             no.addFilho(novoNo);
 
         }
 
         if (celulaDeControle.podeEsquerda()) {
-            NoSolucao novoNo = new NoSolucao(no.getTabuleiro(), no.getQuantidadeDeMovimentos() + 1);
+            NoSolucao novoNo = new NoSolucao(no.getTabuleiro(), no.getQuantidadeDeMovimentos() + 1, no);
             novoNo.getTabuleiro().movaPeca(novoNo.getTabuleiro().getCelula(novoNo.getTabuleiro().getCelulaDeControle().getPosicaoX(), (byte) (novoNo.getTabuleiro().getCelulaDeControle().getPosicaoY() - 1)));
             no.addFilho(novoNo);
 
         }
         
         if (celulaDeControle.podeDireita()) {
-            NoSolucao novoNo = new NoSolucao(no.getTabuleiro(), no.getQuantidadeDeMovimentos() + 1);
+            NoSolucao novoNo = new NoSolucao(no.getTabuleiro(), no.getQuantidadeDeMovimentos() + 1, no);
             novoNo.getTabuleiro().movaPeca(novoNo.getTabuleiro().getCelula(novoNo.getTabuleiro().getCelulaDeControle().getPosicaoX(), (byte) (novoNo.getTabuleiro().getCelulaDeControle().getPosicaoY() + 1)));
             no.addFilho(novoNo);
 
         }               
         
-    }
-
-    static NoSolucao geraNovoNoSolucao(Tabuleiro tabuleiroOrigem, int quantitadeDeMovimentos) {
-
-        NoSolucao novoNo = new NoSolucao(tabuleiroOrigem, quantitadeDeMovimentos);
-
-        return novoNo;
     }
 
 }

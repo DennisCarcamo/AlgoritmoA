@@ -16,24 +16,28 @@ public final class NoSolucao {
     private Tabuleiro tabuleiro;
     private int quantidadeDeMovimentos; //g(n)
     private int pecasForaDoLugar; //h(n)
+    private NoSolucao noPai; //h(n)
+
     private ArrayList<NoSolucao> filhos;
 
-    public NoSolucao(Tabuleiro tabuleiroOrigem, int quantitadeDeMovimentos) {
-        
+    public NoSolucao(Tabuleiro tabuleiroOrigem, int quantitadeDeMovimentos, NoSolucao noPai) {
+
         Tabuleiro novoTabuleiro = new Tabuleiro(tabuleiroOrigem.inicial);
         this.setTabuleiro(novoTabuleiro);
         this.setPecasForaDoLugar(novoTabuleiro.getPecasForaDoLugar());
         this.setQuantidadeDeMovimentos(quantitadeDeMovimentos);
-        
+        this.setNoPai(noPai);
+
     }
-    
+
     public NoSolucao(byte[][] inicial) {
-        
+
         Tabuleiro tabuleiro = new Tabuleiro(inicial);
         this.setTabuleiro(tabuleiro);
         this.setPecasForaDoLugar(tabuleiro.getPecasForaDoLugar());
         this.setQuantidadeDeMovimentos(0);
-        
+        this.setNoPai(null);
+
     }
 
     public ArrayList<NoSolucao> addFilho(NoSolucao noSolucao) {
@@ -69,4 +73,11 @@ public final class NoSolucao {
         this.pecasForaDoLugar = pecasForaDoLugar;
     }
 
+    public NoSolucao getNoPai() {
+        return noPai;
+    }
+
+    public void setNoPai(NoSolucao noPai) {
+        this.noPai = noPai;
+    }
 }
