@@ -41,6 +41,15 @@ public class AlgoritmoAEstrela {
             NoSolucao no;
             no = this.oMenorNosAbertos();
             
+            estadosAbertos.remove(no.getTabuleiro().getHashCode());
+            estadosFechados.put(no.getTabuleiro().getHashCode(), no);
+            
+            if (estadosFinais.containsKey(no.getTabuleiro().getHashCode())){
+                return no.getQuantidadeDeMovimentos();
+            }
+            
+            
+            
             
         }
         
@@ -55,9 +64,10 @@ public class AlgoritmoAEstrela {
         
         no = null;
         
-        for (Map.Entry<Integer, NoSolucao> noCompar : estadosAbertos.entrySet()) {
-            //Integer key = noCompar.getKey();
-            //NoSolucao value = noCompar.getValue();
+        for (Map.Entry<Integer, NoSolucao> noCompar : estadosAbertos.entrySet()) {            
+            if (estadosFinais.containsKey(noCompar.getKey())){
+                return noCompar.getValue();
+            }
             if (no == null || noCompar.getValue().custo() < no.custo())
                 no = noCompar.getValue();            
         }
