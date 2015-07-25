@@ -5,6 +5,7 @@
  */
 package projeto2;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,35 +14,57 @@ import java.util.Map;
  * @author Lucas
  */
 public class AlgoritmoAEstrela {
-    
-    private Map<Integer,NoSolucao> estadosAbertos;
-    private Map<Integer,NoSolucao> estadosFechados;
-    
-    
 
-    public AlgoritmoAEstrela( NoSolucao noRaiz ) {
-        estadosAbertos = new HashMap<Integer,NoSolucao>();
-        estadosFechados = new HashMap<Integer,NoSolucao>();
-        estadosAbertos.put(noRaiz.getTabuleiro().getHashCode(),noRaiz);
-//        estadosAbertos.remove(noRaiz.getTabuleiro().getHashCode()); Como retirar
-        
-        
-        
-    }            
-    
-    private NoSolucao umDosSucessoresESolucao( NoSolucao no ) {
-        
-        for (NoSolucao filho : no.getFilhos()) {
+    private Map<Integer, NoSolucao> estadosAbertos;
+    private Map<Integer, NoSolucao> estadosFechados;
+    private Map<Integer, NoSolucao> estadosFinais;
+    private ArrayList<NoSolucao> sucessores;
             
-            if ( filho.getPecasForaDoLugar() == 0 )
-                return filho;
-        }
-        return null;
+    public AlgoritmoAEstrela(NoSolucao noRaiz) {
+        estadosAbertos = new HashMap<>();
+        estadosFechados = new HashMap<>();
+        estadosFinais = new HashMap<>();
+        estadosAbertos.put(noRaiz.getTabuleiro().getHashCode(), noRaiz);
+
+        NoSolucao noSolucao;
+        noSolucao = new NoSolucao(Tabuleiro.solucao);
+        estadosFinais.put(noSolucao.getTabuleiro().getHashCode(), noSolucao);
+
+//        estadosAbertos.remove(noRaiz.getTabuleiro().getHashCode()); Como retirar
+    }
+    
+    public int encontreASolucao(){
+        NoSolucao noSolucao;
+        noSolucao = null;
         
+        while (!estadosAbertos.isEmpty()) {
+            NoSolucao no;
+            no = this.oMenorNosAbertos();
+            
+            
+        }
+        
+        if (noSolucao == null)
+            return -1;
+        
+        return noSolucao.getQuantidadeDeMovimentos();
+    }
+    
+    public NoSolucao oMenorNosAbertos(){
+        NoSolucao no;
+        
+        no = null;
+        
+        for (Map.Entry<Integer, NoSolucao> noCompar : estadosAbertos.entrySet()) {
+            //Integer key = noCompar.getKey();
+            //NoSolucao value = noCompar.getValue();
+            if (no == null || noCompar.getValue().custo() < no.custo())
+                no = noCompar.getValue();            
+        }
+        return no;
     }
 
-    private void geradorDeSucessores(NoSolucao no) {        
-        
+    private void geradorDeSucessores(NoSolucao no) {
 
         Celula celulaDeControle = no.getTabuleiro().getCelulaDeControle();
         if (celulaDeControle.podeSubir()) {
@@ -64,14 +87,14 @@ public class AlgoritmoAEstrela {
             no.addFilho(novoNo);
 
         }
-        
+
         if (celulaDeControle.podeDireita()) {
             NoSolucao novoNo = new NoSolucao(no.getTabuleiro(), no.getQuantidadeDeMovimentos() + 1, no);
             novoNo.getTabuleiro().movaPeca(novoNo.getTabuleiro().getCelula(novoNo.getTabuleiro().getCelulaDeControle().getPosicaoX(), (byte) (novoNo.getTabuleiro().getCelulaDeControle().getPosicaoY() + 1)));
             no.addFilho(novoNo);
 
-        }               
-        
+        }
+
     }
 
 }

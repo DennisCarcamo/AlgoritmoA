@@ -40,6 +40,10 @@ public final class NoSolucao {
 
     }
     
+    public int custo() {
+        return this.quantidadeDeMovimentos + this.pecasForaDoLugar;
+    }
+    
     public ArrayList<NoSolucao> addFilho(NoSolucao noSolucao) {
         filhos.add(noSolucao);
         return filhos;
