@@ -24,7 +24,7 @@ public class Tabuleiro {
 
     private void copiaEstadoInicialParaTabuleiro(byte[][] inicial) {
         //Talvez eu consiga solucionar isso com um Hash??!
-
+        this.inicial = inicial;
         for (byte linha = 0; linha <= 3; linha++) {
             for (byte coluna = 0; coluna <= 3; coluna++) {
                 Celula celulaAtual = new Celula();
@@ -35,7 +35,7 @@ public class Tabuleiro {
 //                System.err.print( inicial[linha][coluna] );
 //                System.err.print( "     " );
 //                System.err.print( solucao[linha][coluna] );                
-                
+
                 if (inicial[linha][coluna] == 0) {
                     celulaDeControle = celulaAtual;
                 }
@@ -46,15 +46,20 @@ public class Tabuleiro {
         }
     }
 
-    static final byte[][] solucao = { {1, 2, 3, 4}, 
-                                      {12, 13, 14, 5}, 
-                                      {11, 0, 15, 6}, 
-                                      {10, 9, 8, 7}};
+    byte[][] inicial;
+    static final byte[][] solucao = {{1, 2, 3, 4},
+    {12, 13, 14, 5},
+    {11, 0, 15, 6},
+    {10, 9, 8, 7}};
     static final byte linhas = 4;
     static final byte colunas = 4;
     private final Celula[][] estado;
     private byte pecasForaDoLugar = 0;
     private Celula celulaDeControle;
+    
+    public Celula getCelula( byte x, byte y ) {        
+        return estado[ x ][ y ];
+    }
 
     public Celula getCelulaDeControle() {
         return celulaDeControle;
@@ -66,6 +71,12 @@ public class Tabuleiro {
 
     public byte getPecasForaDoLugar() {
         return pecasForaDoLugar;
+    }
+
+    public void movaPeca(Celula peca) {
+        celulaDeControle.setValor(peca.getValor());
+        peca.setValor((byte) 0);
+        celulaDeControle = peca;
     }
 
 }

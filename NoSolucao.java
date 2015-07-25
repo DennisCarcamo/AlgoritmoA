@@ -11,22 +11,39 @@ import java.util.ArrayList;
  *
  * @author Lucas
  */
-public class NoSolucao {
-    
+public final class NoSolucao {
+
     private Tabuleiro tabuleiro;
     private int quantidadeDeMovimentos; //g(n)
     private int pecasForaDoLugar; //h(n)
-    private ArrayList<NoSolucao> filhos; 
+    private ArrayList<NoSolucao> filhos;
+
+    public NoSolucao(Tabuleiro tabuleiroOrigem, int quantitadeDeMovimentos) {
+        
+        Tabuleiro novoTabuleiro = new Tabuleiro(tabuleiroOrigem.inicial);
+        this.setTabuleiro(novoTabuleiro);
+        this.setPecasForaDoLugar(novoTabuleiro.getPecasForaDoLugar());
+        this.setQuantidadeDeMovimentos(quantitadeDeMovimentos);
+        
+    }
     
-    
-    public ArrayList<NoSolucao> addFilho( NoSolucao noSolucao ) {
-        filhos.add( noSolucao );
+    public NoSolucao(byte[][] inicial) {
+        
+        Tabuleiro tabuleiro = new Tabuleiro(inicial);
+        this.setTabuleiro(tabuleiro);
+        this.setPecasForaDoLugar(tabuleiro.getPecasForaDoLugar());
+        this.setQuantidadeDeMovimentos(0);
+        
+    }
+
+    public ArrayList<NoSolucao> addFilho(NoSolucao noSolucao) {
+        filhos.add(noSolucao);
         return filhos;
-    }    
+    }
 
     public ArrayList<NoSolucao> getFilhos() {
         return filhos;
-    }   
+    }
 
     public Tabuleiro getTabuleiro() {
         return tabuleiro;
@@ -51,6 +68,5 @@ public class NoSolucao {
     public void setPecasForaDoLugar(int pecasForaDoLugar) {
         this.pecasForaDoLugar = pecasForaDoLugar;
     }
-    
-    
+
 }

@@ -24,12 +24,10 @@ public class Main {
                        { 1 ,  3, 14, 6} , 
                        {12,  11, 15, 0} , 
                        {10,   9,  8, 7} };
-        Tabuleiro a;
-        a = new Tabuleiro(b); // 8 movimentos
-        
-        noRaiz = 
+                
+        NoSolucao noRaiz = new NoSolucao(b);
 
-        System.err.println(a.getPecasForaDoLugar());
+        System.err.println(noRaiz.getPecasForaDoLugar());
 
     }
 
